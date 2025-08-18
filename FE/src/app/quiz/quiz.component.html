@@ -1,0 +1,48 @@
+<h2>Question: What is your favorite color?</h2>
+
+<form #quizForm="ngForm">
+  <label>
+    <input type="radio" name="answer" value="Red" [(ngModel)]="selectedAnswer">
+    Red
+  </label>
+  <br>
+  <label>
+    <input type="radio" name="answer" value="Blue" [(ngModel)]="selectedAnswer">
+    Blue
+  </label>
+  <br>
+  <label>
+    <input type="radio" name="answer" value="Other" [(ngModel)]="selectedAnswer">
+    Other
+  </label>
+  <br>
+
+  <div>
+       Your Name*:
+    <input type="text" [(ngModel)]="fullName" name="fullName" placeholder="John Smith" required>
+  </div>
+
+  <br>
+
+  <!-- Terms and Conditions -->
+  <label>
+    <input type="checkbox" [(ngModel)]="termsAccepted" name="termsAccepted">
+    I accept the
+    <span (click)="openTerms()" style="color: blue; text-decoration: underline; cursor: pointer;">
+      Terms and Conditions
+    </span>
+  </label>
+  <br>
+  <button [disabled]="!isFormValid()" (click)="submit()">Submit</button>
+</form>
+<!-- Modal -->
+<div *ngIf="showTermsModal" class="modal-overlay" (click)="closeTerms()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h3>Terms and Conditions</h3>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </p>
+    <button (click)="closeTerms()">Close</button>
+  </div>
+</div>

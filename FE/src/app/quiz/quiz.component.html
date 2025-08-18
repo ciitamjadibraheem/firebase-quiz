@@ -1,23 +1,30 @@
+<!-- Main quiz form shown when user hasn't submitted a response yet -->
 <div *ngIf="!alreadySubmitted; else submittedBlock">
+  <!-- Quiz question header -->
   <h2>What is Firebase?</h2>
 
+  <!-- Quiz form with answer options, name field, and terms acceptance -->
   <form #quizForm="ngForm">
+    <!-- Answer option 1 -->
     <label>
       <input type="radio" name="answer" value="A magical coffee machine that codes for you" [(ngModel)]="selectedAnswer">
       A magical coffee machine that codes for you
     </label>
     <br>
+    <!-- Answer option 2 (correct answer) -->
     <label>
       <input type="radio" name="answer" value="A platform by Google that helps you build apps faster" [(ngModel)]="selectedAnswer">
       A platform by Google that helps you build apps faster
     </label>
     <br>
+    <!-- Answer option 3 -->
     <label>
       <input type="radio" name="answer" value="A secret superhero team that saves buggy apps" [(ngModel)]="selectedAnswer">
       A secret superhero team that saves buggy apps
     </label>
     <br>
 
+    <!-- Name input field - required for submission -->
     <div>
       Your Name*:
       <input type="text" [(ngModel)]="fullName" name="fullName" placeholder="John Smith" required>
@@ -25,7 +32,7 @@
 
     <br>
 
-    <!-- Terms and Conditions -->
+    <!-- Terms and Conditions checkbox and link -->
     <label>
       <input type="checkbox" [(ngModel)]="termsAccepted" name="termsAccepted">
       I accept the
@@ -34,10 +41,12 @@
     </span>
     </label>
     <br>
+    <!-- Submit button - disabled until form is valid (answer selected, name provided, terms accepted) -->
     <button [disabled]="!isFormValid()" (click)="submit()">Submit</button>
   </form>
-  <!-- Modal -->
+  <!-- Terms and Conditions Modal - shown when user clicks on Terms and Conditions link -->
   <div *ngIf="showTermsModal" class="modal-overlay" (click)="closeTerms()">
+    <!-- stopPropagation prevents clicks inside the modal from closing it -->
     <div class="modal-content" (click)="$event.stopPropagation()">
       <h3>Terms and Conditions</h3>
       <p style="text-align: left!important;">
@@ -52,7 +61,8 @@
       <button (click)="closeTerms()">Close</button>
     </div>
   </div>
-  <!-- Success Modal -->
+
+  <!-- Success Modal - shown after successful submission to Firestore -->
   <div *ngIf="showSuccessModal" class="modal-overlay" (click)="closeSuccess()">
     <div class="modal-content" (click)="$event.stopPropagation()">
       <h3>Thank you!</h3>
@@ -61,7 +71,7 @@
     </div>
   </div>
 
-  <!-- Error Modal -->
+  <!-- Error Modal - shown if there's an error saving to Firestore -->
   <div *ngIf="showErrorModal" class="modal-overlay" (click)="closeError()">
     <div class="modal-content" (click)="$event.stopPropagation()">
       <h3>Sorry!</h3>
@@ -70,6 +80,8 @@
     </div>
   </div>
 </div>
+
+<!-- Template shown when user has already submitted a quiz response -->
 <ng-template #submittedBlock>
   <div class="submitted-message">
     <h2>Hi {{fullName}}!</h2>
@@ -77,8 +89,9 @@
     <h4>Your answer is: Firebase is {{selectedAnswer}}</h4>
   </div>
 </ng-template>
-<!-- Loading Overlay -->
-<div *ngIf="loading"  class="modal-overlay">
+
+<!-- Loading Overlay - shown during data loading and saving operations -->
+<div *ngIf="loading" class="modal-overlay">
   <div class="loading">
     <div class="spinner"></div>
   </div>

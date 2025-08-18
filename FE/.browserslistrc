@@ -1,0 +1,18 @@
+# This file is used by the build system to adjust CSS and JS output to support the specified browsers below.
+# For additional information regarding the format and rule options, please see:
+# https://github.com/browserslist/browserslist#queries
+
+# For the full list of supported browsers by the Angular framework, please see:
+# https://angular.dev/reference/versions#browser-support
+
+# You can see what browsers were selected by your queries by running:
+#   npx browserslist
+last 2 Chrome versions
+last 2 Firefox versions
+last 2 Edge major versions
+last 2 Safari major versions
+last 2 iOS major versions
+iOS 15-16 # Updated to support more modern iOS versions
+not IE 11 # Angular doesn't support IE 11
+not ios_saf 15.2-15.3 # Safari 15.2-15.3 has issues with Angular
+not safari 15.2-15.3 # Safari 15.2-15.3 has issues with Angular

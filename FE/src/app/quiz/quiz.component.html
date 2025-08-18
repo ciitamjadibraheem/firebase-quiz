@@ -1,20 +1,20 @@
 <div *ngIf="!alreadySubmitted; else submittedBlock">
-  <h2>What is your favorite color?</h2>
+  <h2>What is Firebase?</h2>
 
   <form #quizForm="ngForm">
     <label>
-      <input type="radio" name="answer" value="Red" [(ngModel)]="selectedAnswer">
-      Red
+      <input type="radio" name="answer" value="A magical coffee machine that codes for you" [(ngModel)]="selectedAnswer">
+      A magical coffee machine that codes for you
     </label>
     <br>
     <label>
-      <input type="radio" name="answer" value="Blue" [(ngModel)]="selectedAnswer">
-      Blue
+      <input type="radio" name="answer" value="A platform by Google that helps you build apps faster" [(ngModel)]="selectedAnswer">
+      A platform by Google that helps you build apps faster
     </label>
     <br>
     <label>
-      <input type="radio" name="answer" value="Other" [(ngModel)]="selectedAnswer">
-      Other
+      <input type="radio" name="answer" value="A secret superhero team that saves buggy apps" [(ngModel)]="selectedAnswer">
+      A secret superhero team that saves buggy apps
     </label>
     <br>
 
@@ -40,9 +40,14 @@
   <div *ngIf="showTermsModal" class="modal-overlay" (click)="closeTerms()">
     <div class="modal-content" (click)="$event.stopPropagation()">
       <h3>Terms and Conditions</h3>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      <p style="text-align: left!important;">
+        Only one submission per attendee is allowed, no sneaky second tries!
+        <br>
+        The winner will be selected randomly from valid answers.
+        <br>
+        Your name and answer will be stored securely in Firebase for analysis of the event.
+        <br>
+        Participating means you accept that the prize is awesome!
       </p>
       <button (click)="closeTerms()">Close</button>
     </div>
@@ -69,7 +74,7 @@
   <div class="submitted-message">
     <h2>Hi {{fullName}}!</h2>
     <h3>Thank you! You have already submitted your quiz.</h3>
-    <h4>Your answer is {{selectedAnswer}}</h4>
+    <h4>Your answer is: Firebase is {{selectedAnswer}}</h4>
   </div>
 </ng-template>
 <!-- Loading Overlay -->

@@ -1,74 +1,80 @@
-<h2>Question: What is your favorite color?</h2>
+<div *ngIf="!alreadySubmitted; else submittedBlock">
+  <h2>What is your favorite color?</h2>
 
-<form #quizForm="ngForm">
-  <label>
-    <input type="radio" name="answer" value="Red" [(ngModel)]="selectedAnswer">
-    Red
-  </label>
-  <br>
-  <label>
-    <input type="radio" name="answer" value="Blue" [(ngModel)]="selectedAnswer">
-    Blue
-  </label>
-  <br>
-  <label>
-    <input type="radio" name="answer" value="Other" [(ngModel)]="selectedAnswer">
-    Other
-  </label>
-  <br>
+  <form #quizForm="ngForm">
+    <label>
+      <input type="radio" name="answer" value="Red" [(ngModel)]="selectedAnswer">
+      Red
+    </label>
+    <br>
+    <label>
+      <input type="radio" name="answer" value="Blue" [(ngModel)]="selectedAnswer">
+      Blue
+    </label>
+    <br>
+    <label>
+      <input type="radio" name="answer" value="Other" [(ngModel)]="selectedAnswer">
+      Other
+    </label>
+    <br>
 
-  <div>
-       Your Name*:
-    <input type="text" [(ngModel)]="fullName" name="fullName" placeholder="John Smith" required>
-  </div>
+    <div>
+      Your Name*:
+      <input type="text" [(ngModel)]="fullName" name="fullName" placeholder="John Smith" required>
+    </div>
 
-  <br>
+    <br>
 
-  <!-- Terms and Conditions -->
-  <label>
-    <input type="checkbox" [(ngModel)]="termsAccepted" name="termsAccepted">
-    I accept the
-    <span (click)="openTerms()" style="color: blue; text-decoration: underline; cursor: pointer;">
+    <!-- Terms and Conditions -->
+    <label>
+      <input type="checkbox" [(ngModel)]="termsAccepted" name="termsAccepted">
+      I accept the
+      <span (click)="openTerms()" style="color: blue; text-decoration: underline; cursor: pointer;">
       Terms and Conditions
     </span>
-  </label>
-  <br>
-  <button [disabled]="!isFormValid()" (click)="submit()">Submit</button>
-</form>
-<!-- Modal -->
-<div *ngIf="showTermsModal" class="modal-overlay" (click)="closeTerms()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <h3>Terms and Conditions</h3>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </p>
-    <button (click)="closeTerms()">Close</button>
+    </label>
+    <br>
+    <button [disabled]="!isFormValid()" (click)="submit()">Submit</button>
+  </form>
+  <!-- Modal -->
+  <div *ngIf="showTermsModal" class="modal-overlay" (click)="closeTerms()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h3>Terms and Conditions</h3>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <button (click)="closeTerms()">Close</button>
+    </div>
+  </div>
+  <!-- Success Modal -->
+  <div *ngIf="showSuccessModal" class="modal-overlay" (click)="closeSuccess()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h3>Thank you!</h3>
+      <p>Your answer has been saved successfully.</p>
+      <button (click)="closeSuccess()">Close</button>
+    </div>
+  </div>
+
+  <!-- Error Modal -->
+  <div *ngIf="showErrorModal" class="modal-overlay" (click)="closeError()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h3>Sorry!</h3>
+      <p>Error saving to Firestore.</p>
+      <button class="error" (click)="closeError()">Close</button>
+    </div>
   </div>
 </div>
-
+<ng-template #submittedBlock>
+  <div class="submitted-message">
+    <h2>Hi {{fullName}}!</h2>
+    <h3>Thank you! You have already submitted your quiz.</h3>
+    <h4>Your answer is {{selectedAnswer}}</h4>
+  </div>
+</ng-template>
 <!-- Loading Overlay -->
-<div *ngIf="loading" class="modal-overlay">
-  <div class="modal-content">
-    <h3>Submitting...</h3>
+<div *ngIf="loading"  class="modal-overlay">
+  <div class="loading">
     <div class="spinner"></div>
-  </div>
-</div>
-
-<!-- Success Modal -->
-<div *ngIf="showSuccessModal" class="modal-overlay" (click)="closeSuccess()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <h3>Thank you!</h3>
-    <p>Your answer has been saved successfully.</p>
-    <button (click)="closeSuccess()">Close</button>
-  </div>
-</div>
-
-<!-- Error Modal -->
-<div *ngIf="showErrorModal" class="modal-overlay" (click)="closeError()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <h3>Sorry!</h3>
-    <p>Error saving to Firestore.</p>
-    <button class="error" (click)="closeError()">Close</button>
   </div>
 </div>

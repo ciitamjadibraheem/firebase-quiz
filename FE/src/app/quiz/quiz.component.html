@@ -46,3 +46,29 @@
     <button (click)="closeTerms()">Close</button>
   </div>
 </div>
+
+<!-- Loading Overlay -->
+<div *ngIf="loading" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Submitting...</h3>
+    <div class="spinner"></div>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div *ngIf="showSuccessModal" class="modal-overlay" (click)="closeSuccess()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h3>Thank you!</h3>
+    <p>Your answer has been saved successfully.</p>
+    <button (click)="closeSuccess()">Close</button>
+  </div>
+</div>
+
+<!-- Error Modal -->
+<div *ngIf="showErrorModal" class="modal-overlay" (click)="closeError()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h3>Sorry!</h3>
+    <p>Error saving to Firestore.</p>
+    <button class="error" (click)="closeError()">Close</button>
+  </div>
+</div>

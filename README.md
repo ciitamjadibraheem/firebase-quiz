@@ -1,3 +1,6 @@
+Full article on CIIT Training bolg
+https://ciit-training.com/2025/08/21/how-firebase-enabled-us-to-built-a-quiz-app-in-hours-without-a-backend/
+
 # Firebase Quiz Application
 
 A simple quiz application built with Angular and Firebase. This application allows users to:
